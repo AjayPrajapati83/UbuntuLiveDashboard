@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 15 86% 53%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 15 86% 53%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 15 86% 53%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 15 86% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-ubuntu;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-md bg-white/20 border border-white/30 shadow-xl;
+  }
+  
+  .ubuntu-gradient {
+    @apply bg-gradient-to-r from-ubuntu-500 to-ubuntu-600;
+  }
+  
+  .cosmic-gradient {
+    @apply bg-gradient-to-r from-cosmic-500 to-cosmic-600;
+  }
+  
+  .hero-gradient {
+    @apply bg-gradient-to-br from-ubuntu-50 via-orange-50 to-purple-50;
+  }
+
+  /* Panchtavya Element Gradients */
+  .fire-gradient {
+    @apply bg-gradient-to-br from-fire-400 via-red-500 to-orange-600;
+  }
+  
+  .water-gradient {
+    @apply bg-gradient-to-br from-water-400 via-blue-500 to-cyan-600;
+  }
+  
+  .air-gradient {
+    @apply bg-gradient-to-br from-air-300 via-sky-400 to-blue-500;
+  }
+  
+  .earth-gradient {
+    @apply bg-gradient-to-br from-earth-400 via-yellow-500 to-amber-600;
+  }
+  
+  .space-gradient {
+    @apply bg-gradient-to-br from-space-400 via-purple-500 to-indigo-600;
+  }
+
+  /* Enhanced Glass Effects */
+  .glass-card-fire {
+    @apply backdrop-blur-md bg-fire-50/95 border border-fire-200/50 shadow-xl shadow-fire-500/20;
+  }
+  
+  .glass-card-water {
+    @apply backdrop-blur-md bg-water-50/95 border border-water-200/50 shadow-xl shadow-water-500/20;
+  }
+  
+  .glass-card-air {
+    @apply backdrop-blur-md bg-air-50/95 border border-air-200/50 shadow-xl shadow-air-500/20;
+  }
+  
+  .glass-card-earth {
+    @apply backdrop-blur-md bg-earth-50/95 border border-earth-200/50 shadow-xl shadow-earth-500/20;
+  }
+  
+  .glass-card-space {
+    @apply backdrop-blur-md bg-space-50/95 border border-space-200/50 shadow-xl shadow-space-500/20;
+  }
+
+  /* Panchtavya Background */
+  .panchtavya-bg {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, 
+      rgba(234, 117, 72, 0.1) 0%,    /* Fire */
+      rgba(14, 165, 233, 0.1) 20%,   /* Water */
+      rgba(100, 116, 139, 0.1) 40%,  /* Air */
+      rgba(234, 179, 8, 0.1) 60%,    /* Earth */
+      rgba(168, 85, 247, 0.1) 80%,   /* Space */
+      rgba(234, 117, 72, 0.1) 100%   /* Fire */
+    );
+    background-size: 400% 400%;
+    animation: panchtavya-flow 20s ease-in-out infinite;
+  }
+
+  /* Mobile Responsive Utilities */
+  .mobile-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .mobile-text {
+    @apply text-sm sm:text-base lg:text-lg;
+  }
+  
+  .mobile-heading {
+    @apply text-2xl sm:text-3xl lg:text-4xl xl:text-5xl;
+  }
+
+  /* Safe Area Support for Mobile */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Mobile Header Fix */
+  @supports (padding-top: env(safe-area-inset-top)) {
+    .mobile-header-fix {
+      padding-top: calc(env(safe-area-inset-top) + 0.5rem);
+    }
+  }
+
+  /* Prevent mobile zoom on input focus */
+  @media screen and (max-width: 768px) {
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+    
+    /* Fix for mobile browser UI hiding header */
+    body {
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+    }
+    
+    html {
+      height: -webkit-fill-available;
+    }
+    
+    /* Ensure header stays visible */
+    .mobile-header-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  }
+
+  /* iOS Safari specific fixes */
+  @supports (-webkit-touch-callout: none) {
+    .ios-safe-area {
+      padding-top: constant(safe-area-inset-top);
+      padding-top: env(safe-area-inset-top);
+    }
+  }
+
+  /* Enhanced Animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@keyframes panchtavya-flow {
+  0%, 100% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+}
