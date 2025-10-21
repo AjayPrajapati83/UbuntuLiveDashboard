@@ -5,7 +5,8 @@ const nextConfig = {
   },
   // Performance optimizations
   experimental: {
-    optimizeCss: true,
+    // Disabled optimizeCss to avoid critters dependency issue
+    // optimizeCss: true,
     optimizePackageImports: ['framer-motion', 'lucide-react'],
   },
   // Compiler optimizations
