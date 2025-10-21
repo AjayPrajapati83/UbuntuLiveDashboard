@@ -34,7 +34,7 @@ export const OptimizedFireBackground = () => {
     >
       {/* Simplified Fire Gradient Base - Using CSS animations instead of Framer Motion */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-red-900/20 via-orange-800/25 to-yellow-600/20 animate-pulse-slow"
+        className="absolute inset-0 bg-gradient-to-br from-red-600/30 via-orange-500/35 to-yellow-400/30 animate-pulse-slow"
         style={{ 
           backgroundSize: '300% 300%',
           willChange: 'background-position',
@@ -45,7 +45,7 @@ export const OptimizedFireBackground = () => {
       {blazes.map((blaze) => (
         <motion.div
           key={blaze.id}
-          className="absolute bg-gradient-to-t from-red-600/40 via-orange-500/50 to-yellow-400/60"
+          className="absolute bg-gradient-to-t from-red-500/50 via-orange-400/60 to-yellow-300/70"
           style={{
             left: `${blaze.x}%`,
             bottom: '0%',
@@ -71,7 +71,7 @@ export const OptimizedFireBackground = () => {
       {fireParticles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-gradient-to-t from-red-500/60 to-yellow-400/80"
+          className="absolute rounded-full bg-gradient-to-t from-red-400/70 to-yellow-300/90"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -135,7 +135,7 @@ export const OptimizedWaterBackground = () => {
     >
       {/* Simplified Water Gradient Base */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-cyan-800/25 to-teal-600/20"
+        className="absolute inset-0 bg-gradient-to-br from-blue-700/25 via-blue-500/30 to-blue-400/25"
         style={{ 
           backgroundSize: '200% 200%',
           animation: 'panchtavya-flow 15s ease-in-out infinite',
@@ -147,7 +147,7 @@ export const OptimizedWaterBackground = () => {
       {droplets.map((droplet) => (
         <motion.div
           key={droplet.id}
-          className="absolute rounded-full bg-gradient-to-b from-blue-300/60 to-cyan-400/70"
+          className="absolute rounded-full bg-gradient-to-b from-blue-200/70 to-blue-400/80"
           style={{
             left: `${droplet.x}%`,
             width: `${droplet.size}px`,
@@ -171,7 +171,7 @@ export const OptimizedWaterBackground = () => {
       {bubbles.map((bubble) => (
         <motion.div
           key={bubble.id}
-          className="absolute rounded-full bg-gradient-to-br from-blue-400/30 to-cyan-300/50 border border-blue-300/20"
+          className="absolute rounded-full bg-gradient-to-br from-blue-300/40 to-blue-500/60 border border-blue-200/30"
           style={{
             left: `${bubble.x}%`,
             top: `${bubble.y}%`,
@@ -337,7 +337,7 @@ export const OptimizedEarthBackground = () => {
     >
       {/* Simplified Earth Gradient Base */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-amber-900/15 via-yellow-800/20 to-green-700/15"
+        className="absolute inset-0 bg-gradient-to-br from-amber-800/20 via-yellow-700/25 to-green-600/20"
         style={{ 
           backgroundSize: '200% 200%',
           animation: 'panchtavya-flow 25s ease-in-out infinite',
@@ -349,7 +349,7 @@ export const OptimizedEarthBackground = () => {
       {floatingRocks.map((rock) => (
         <motion.div
           key={rock.id}
-          className="absolute bg-gradient-to-br from-amber-600/30 to-yellow-700/50"
+          className="absolute bg-gradient-to-br from-amber-700/40 to-yellow-800/60"
           style={{
             left: `${rock.x}%`,
             top: `${rock.y}%`,
@@ -377,7 +377,7 @@ export const OptimizedEarthBackground = () => {
       {leaves.map((leaf) => (
         <motion.div
           key={leaf.id}
-          className="absolute bg-gradient-to-br from-green-400/40 to-green-600/60"
+          className="absolute bg-gradient-to-br from-green-500/50 to-green-700/70"
           style={{
             left: `${leaf.x}%`,
             top: `${leaf.y}%`,

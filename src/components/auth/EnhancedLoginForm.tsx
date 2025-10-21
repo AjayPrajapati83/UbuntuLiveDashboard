@@ -56,14 +56,14 @@ export const EnhancedLoginForm = () => {
           transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
           className="w-full max-w-lg mx-auto"
         >
-          <Card className="glass-card-optimized border-space-200/50 shadow-2xl hover:shadow-space-500/25 transition-all duration-300 mx-4 sm:mx-0 overflow-hidden gpu-accelerated">
-            <CardHeader className="text-center space-y-4 sm:space-y-6 pb-6 sm:pb-8 px-6 sm:px-8 pt-8 sm:pt-10">
+          <Card className="glass-card-optimized border-space-200/50 shadow-2xl hover:shadow-space-500/25 transition-all duration-300 mx-4 sm:mx-0 overflow-visible gpu-accelerated">
+            <CardHeader className="text-center space-y-4 sm:space-y-6 pb-6 sm:pb-8 px-6 sm:px-8 pt-20 sm:pt-24">
               {/* Ubuntu Logo */}
               <motion.div
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-                className="relative mx-auto"
+                className="relative mx-auto -mt-4 mb-6"
               >
                 {/* Main Logo Container */}
                 <div className="relative">
