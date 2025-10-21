@@ -6,7 +6,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { UserDashboard } from '@/components/dashboard/UserDashboard';
 import { AdminDashboard } from '@/components/dashboard/AdminDashboard';
-import { PanchtavyaBackground } from '@/components/ui/animated-backgrounds';
+import { OptimizedPanchtavyaBackground } from '@/components/ui/optimized-backgrounds';
 
 export default function Home() {
   const { isAuthenticated, user } = useAuthStore();
@@ -19,7 +19,7 @@ export default function Home() {
     <div className="relative min-h-screen safe-area-top safe-area-bottom">
       {/* Panchtavya Background for Dashboard */}
       <div className="fixed inset-0 z-0">
-        <PanchtavyaBackground />
+        <OptimizedPanchtavyaBackground />
       </div>
       
       <div className="relative z-10">

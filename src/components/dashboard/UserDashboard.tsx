@@ -12,7 +12,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { OptimizedImage } from '@/components/ui/optimized-image';
-import { PanchtavyaBackground } from '@/components/ui/animated-backgrounds';
+// Removed heavy background import for better performance
+import { PERFORMANCE_CONFIG, getAnimationProps } from '@/lib/performance';
 
 export const UserDashboard = () => {
   const [selectedType, setSelectedType] = useState<Event['eventType'] | 'All'>('All');

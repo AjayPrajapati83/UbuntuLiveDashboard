@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Trash2, Users, Trophy, Edit3, School, AlertTriangle } from 'lucide-react';
+import { PERFORMANCE_CONFIG } from '@/lib/performance';
 import { useSupabaseCollegeStore } from '@/store/supabaseCollegeStore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

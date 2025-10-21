@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TrendingDown, AlertTriangle, Users, MinusCircle } from 'lucide-react';
+import { PERFORMANCE_CONFIG } from '@/lib/performance';
 import { useSupabaseCollegeStore } from '@/store/supabaseCollegeStore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

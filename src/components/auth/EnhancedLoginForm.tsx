@@ -7,7 +7,8 @@ import { useAuthStore } from '@/store/authStore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { PanchtavyaBackground } from '@/components/ui/animated-backgrounds';
+import { OptimizedPanchtavyaBackground } from '@/components/ui/optimized-backgrounds';
+import { PERFORMANCE_CONFIG, getAnimationProps } from '@/lib/performance';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 import { toast } from 'sonner';
 
@@ -16,16 +17,9 @@ export const EnhancedLoginForm = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { login } = useAuthStore();
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  // Removed expensive mouse tracking for better performance
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,28 +40,14 @@ export const EnhancedLoginForm = () => {
   };
 
 
-  const floatingElements = Array.from({ length: 15 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    delay: Math.random() * 2,
-    duration: 3 + Math.random() * 2,
-  }));
+  // Removed floating elements for better performance
 
   return (
     <div className="min-h-screen relative overflow-hidden panchtavya-bg">
-      {/* Panchtavya Animated Background */}
-      <PanchtavyaBackground />
+      {/* Optimized Panchtavya Background */}
+      <OptimizedPanchtavyaBackground />
 
-      {/* Mouse Follower */}
-      <motion.div
-        className="fixed w-6 h-6 bg-white/10 rounded-full pointer-events-none z-50 mix-blend-difference"
-        animate={{
-          x: mousePosition.x - 12,
-          y: mousePosition.y - 12,
-        }}
-        transition={{ type: "spring", stiffness: 500, damping: 28 }}
-      />
+      {/* Removed expensive mouse follower */}
 
       <div className="relative z-10 min-h-screen flex items-center justify-center mobile-padding py-8">
         <motion.div
@@ -76,7 +56,7 @@ export const EnhancedLoginForm = () => {
           transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
           className="w-full max-w-lg mx-auto"
         >
-          <Card className="bg-black/40 backdrop-blur-md border-space-200/50 shadow-2xl hover:shadow-space-500/25 transition-all duration-500 mx-4 sm:mx-0 overflow-hidden">
+          <Card className="glass-card-optimized border-space-200/50 shadow-2xl hover:shadow-space-500/25 transition-all duration-300 mx-4 sm:mx-0 overflow-hidden gpu-accelerated">
             <CardHeader className="text-center space-y-4 sm:space-y-6 pb-6 sm:pb-8 px-6 sm:px-8 pt-8 sm:pt-10">
               {/* Ubuntu Logo */}
               <motion.div
@@ -87,25 +67,8 @@ export const EnhancedLoginForm = () => {
               >
                 {/* Main Logo Container */}
                 <div className="relative">
-                  {/* Enhanced circular glow behind logo */}
-                  <motion.div
-                    animate={{ 
-                      opacity: [0.5, 0.8, 0.5],
-                      scale: [1, 1.2, 1]
-                    }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    className="absolute inset-0 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full bg-gradient-to-br from-white/40 via-white/25 to-white/10 blur-lg"
-                  />
-                  
-                  {/* Additional outer glow */}
-                  <motion.div
-                    animate={{ 
-                      opacity: [0.2, 0.4, 0.2],
-                      scale: [1.2, 1.4, 1.2]
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    className="absolute -inset-2 w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-white/20 via-white/10 to-transparent blur-xl"
-                  />
+                  {/* Simplified glow behind logo */}
+                  <div className="absolute inset-0 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full bg-gradient-to-br from-white/30 via-white/15 to-white/5 blur-lg animate-pulse-slow" />
                   
                   {/* Ubuntu Logo */}
                   <OptimizedImage
@@ -117,60 +80,82 @@ export const EnhancedLoginForm = () => {
                     priority={true}
                   />
                   
-                  {/* Animated shine effect */}
-                  <motion.div
-                    className="absolute inset-0 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full"
-                    animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                  />
+                  {/* Simplified shine effect */}
+                  <div className="absolute inset-0 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-full animate-spin" style={{animationDuration: '8s'}} />
                   
-                  {/* Rotating border */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute -inset-6 border border-dashed border-white/15 rounded-full"
-                  />
+                  {/* Static border */}
+                  <div className="absolute -inset-6 border border-dashed border-white/10 rounded-full" />
                   
-                  {/* Orbiting elements around logo */}
+                  {/* Five Elements Orbiting Animation */}
                   <div className="absolute inset-0 w-full h-full">
-                    {/* Fire element */}
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                    {/* Fire Element Orbit */}
+                    <motion.div 
                       className="absolute inset-0 w-full h-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                       style={{ transformOrigin: 'center' }}
                     >
-                      <Flame className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-4 h-4 text-fire-400" />
+                      <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+                        <div className="w-8 h-8 bg-fire-500/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-fire-400/30">
+                          <Flame className="w-5 h-5 text-fire-600" />
+                        </div>
+                      </div>
                     </motion.div>
                     
-                    {/* Water element */}
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 12, repeat: Infinity, ease: "linear", delay: 3 }}
+                    {/* Water Element Orbit */}
+                    <motion.div 
                       className="absolute inset-0 w-full h-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 4 }}
                       style={{ transformOrigin: 'center' }}
                     >
-                      <Droplets className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-4 h-4 text-water-400" />
+                      <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+                        <div className="w-8 h-8 bg-water-500/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-water-400/30">
+                          <Droplets className="w-5 h-5 text-water-600" />
+                        </div>
+                      </div>
                     </motion.div>
                     
-                    {/* Air element */}
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 12, repeat: Infinity, ease: "linear", delay: 6 }}
+                    {/* Air Element Orbit */}
+                    <motion.div 
                       className="absolute inset-0 w-full h-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 8 }}
                       style={{ transformOrigin: 'center' }}
                     >
-                      <Wind className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-4 h-4 text-air-400" />
+                      <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+                        <div className="w-8 h-8 bg-air-500/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-air-400/30">
+                          <Wind className="w-5 h-5 text-air-600" />
+                        </div>
+                      </div>
                     </motion.div>
                     
-                    {/* Earth element */}
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 12, repeat: Infinity, ease: "linear", delay: 9 }}
+                    {/* Earth Element Orbit */}
+                    <motion.div 
                       className="absolute inset-0 w-full h-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 12 }}
                       style={{ transformOrigin: 'center' }}
                     >
-                      <Mountain className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-4 h-4 text-earth-400" />
+                      <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+                        <div className="w-8 h-8 bg-earth-500/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-earth-400/30">
+                          <Mountain className="w-5 h-5 text-earth-600" />
+                        </div>
+                      </div>
+                    </motion.div>
+                    
+                    {/* Space Element Orbit */}
+                    <motion.div 
+                      className="absolute inset-0 w-full h-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 16 }}
+                      style={{ transformOrigin: 'center' }}
+                    >
+                      <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+                        <div className="w-8 h-8 bg-space-500/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-space-400/30">
+                          <Orbit className="w-5 h-5 text-space-600" />
+                        </div>
+                      </div>
                     </motion.div>
                   </div>
                 </div>
@@ -183,28 +168,19 @@ export const EnhancedLoginForm = () => {
                   transition={{ delay: 0.5 }}
                 >
                   <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
-                    <motion.span
-                      animate={{ 
-                        backgroundPosition: ['0%', '100%', '0%'] 
-                      }}
-                      transition={{ 
-                        duration: 3, 
-                        repeat: Infinity, 
-                        ease: "linear" 
-                      }}
+                    <span
                       className="inline-block bg-gradient-to-r from-space-400 via-fire-400 to-water-400 bg-clip-text text-transparent"
-                      style={{ backgroundSize: '200%' }}
+                      style={{ 
+                        backgroundSize: '200%',
+                        animation: 'panchtavya-flow 4s ease-in-out infinite',
+                        willChange: 'background-position'
+                      }}
                     >
                       UBUNTU 2025
-                    </motion.span>
+                    </span>
                   </CardTitle>
-                  <CardDescription className="text-white/80 text-sm sm:text-base md:text-lg">
-                    <motion.span
-                      animate={{ opacity: [0.8, 1, 0.8] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      Official Live Dashboard
-                    </motion.span>
+                  <CardDescription className="text-gray-800 font-medium text-sm sm:text-base md:text-lg animate-pulse-slow">
+                    Official Live Dashboard
                   </CardDescription>
                 </motion.div>
               </div>
@@ -224,13 +200,7 @@ export const EnhancedLoginForm = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="bg-black/30 border-white/40 text-white placeholder:text-white/70 focus:border-space-400 focus:bg-black/40 focus:ring-2 focus:ring-space-400/50 transition-all duration-300 h-10 sm:h-12 mobile-text"
-                  />
-                  <motion.div
-                    className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-space-400 to-water-400"
-                    initial={{ width: 0 }}
-                    whileFocus={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
+                    className="glass-card-optimized border-gray-400 text-gray-800 placeholder:text-gray-600 focus:border-space-400 focus:ring-2 focus:ring-space-400/50 transition-all duration-200 h-10 sm:h-12 mobile-text gpu-accelerated"
                   />
                 </motion.div>
 
@@ -246,14 +216,14 @@ export const EnhancedLoginForm = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="bg-black/30 border-white/40 text-white placeholder:text-white/70 focus:border-space-400 focus:bg-black/40 focus:ring-2 focus:ring-space-400/50 transition-all duration-300 h-10 sm:h-12 pr-12 mobile-text"
+                    className="glass-card-optimized border-gray-400 text-gray-800 placeholder:text-gray-600 focus:border-space-400 focus:ring-2 focus:ring-space-400/50 transition-all duration-200 h-10 sm:h-12 pr-12 mobile-text gpu-accelerated"
                   />
                   <motion.button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     whileHover={{ opacity: 0.8 }}
                     whileTap={{ opacity: 0.6 }}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60 hover:text-white transition-all duration-200 z-10 flex items-center justify-center w-8 h-8 hover:bg-white/10 rounded-full"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800 transition-all duration-200 z-10 flex items-center justify-center w-8 h-8 hover:bg-gray-200/20 rounded-full"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </motion.button>
@@ -267,42 +237,19 @@ export const EnhancedLoginForm = () => {
                   <Button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full h-12 sm:h-14 mobile-text font-semibold space-gradient hover:from-space-600 hover:to-water-600 border-0 shadow-2xl hover:shadow-space-500/25 transition-all duration-300 relative overflow-hidden group"
+                    className="w-full h-12 sm:h-14 mobile-text font-semibold space-gradient hover:from-space-600 hover:to-water-600 border-0 shadow-2xl hover:shadow-space-500/25 transition-all duration-200 relative overflow-hidden group gpu-accelerated"
                   >
-                    <AnimatePresence mode="wait">
-                      {isLoading ? (
-                        <motion.div
-                          key="loading"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className="flex items-center gap-3"
-                        >
-                          <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                            className="w-6 h-6 border-2 border-white border-t-transparent rounded-full"
-                          />
-                          <span>Authenticating...</span>
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          key="login"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className="flex items-center gap-3"
-                        >
-                          <Zap className="w-6 h-6" />
-                          <span>Sign In</span>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                      animate={{ x: [-100, 100] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    />
+                    {isLoading ? (
+                      <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>Authenticating...</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-3">
+                        <Zap className="w-6 h-6" />
+                        <span>Sign In</span>
+                      </div>
+                    )}
                   </Button>
                 </motion.div>
               </form>
@@ -314,77 +261,32 @@ export const EnhancedLoginForm = () => {
                 transition={{ delay: 1.2 }}
                 className="text-center space-y-2"
               >
-                <div className="flex items-center justify-center gap-2 text-white/60 flex-wrap">
-                  <Flame className="w-3 h-3 sm:w-4 sm:h-4 text-fire-400" />
-                  <Droplets className="w-3 h-3 sm:w-4 sm:h-4 text-water-400" />
-                  <Wind className="w-3 h-3 sm:w-4 sm:h-4 text-air-400" />
-                  <Mountain className="w-3 h-3 sm:w-4 sm:h-4 text-earth-400" />
-                  <Orbit className="w-3 h-3 sm:w-4 sm:h-4 text-space-400" />
+                <div className="flex items-center justify-center gap-2 text-gray-700 flex-wrap">
+                  <Flame className="w-3 h-3 sm:w-4 sm:h-4 text-fire-500" />
+                  <Droplets className="w-3 h-3 sm:w-4 sm:h-4 text-water-500" />
+                  <Wind className="w-3 h-3 sm:w-4 sm:h-4 text-air-500" />
+                  <Mountain className="w-3 h-3 sm:w-4 sm:h-4 text-earth-500" />
+                  <Orbit className="w-3 h-3 sm:w-4 sm:h-4 text-space-500" />
                 </div>
                 <div className="text-center">
-                  <span className="text-xs sm:text-sm text-white/60">Powered by Ubuntu 2025</span>
+                  <span className="text-xs sm:text-sm text-gray-700 font-medium">Powered by Ubuntu 2025</span>
                 </div>
 
                 {/* Developer Credit */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.5 }}
-                  className="text-center mt-4 pt-3 border-t border-white/20"
-                >
+                <div className="text-center mt-4 pt-3 border-t border-gray-300/40 animate-fade-in">
                   <div className="flex items-center justify-center gap-2 text-xs sm:text-sm">
-                    <motion.div
-                      animate={{ 
-                        filter: [
-                          "drop-shadow(0 0 2px rgba(59, 130, 246, 0.5))",
-                          "drop-shadow(0 0 8px rgba(59, 130, 246, 0.8))",
-                          "drop-shadow(0 0 2px rgba(59, 130, 246, 0.5))"
-                        ]
-                      }}
-                      transition={{ 
-                        duration: 2, 
-                        repeat: Infinity, 
-                        ease: "easeInOut" 
-                      }}
-                      className="text-sm sm:text-base"
-                      style={{
-                        textShadow: "0 0 4px rgba(59, 130, 246, 0.6)"
-                      }}
-                    >
-                      💻
-                    </motion.div>
-                    <span className="text-white/50">Developed by</span>
-                    <motion.a
+                    <div className="text-sm sm:text-base animate-pulse-slow">💻</div>
+                    <span className="text-gray-600">Developed by</span>
+                    <a
                       href="https://www.linkedin.com/in/ajayprajapatii/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      animate={{
-                        scale: [1, 1.1, 1],
-                        textShadow: [
-                          "0 0 4px rgba(192, 192, 192, 0.6)",
-                          "0 0 12px rgba(255, 255, 255, 0.8)",
-                          "0 0 4px rgba(192, 192, 192, 0.6)"
-                        ]
-                      }}
-                      whileHover={{ 
-                        scale: 1.15,
-                        textShadow: "0 0 15px rgba(255, 255, 255, 1)"
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      className="font-semibold text-white/80 hover:text-white transition-colors duration-300 cursor-pointer"
-                      style={{
-                        filter: "drop-shadow(0 0 4px rgba(192, 192, 192, 0.7))"
-                      }}
+                      className="font-semibold text-gray-800 hover:text-space-600 transition-colors duration-200 cursor-pointer hover:scale-105 gpu-accelerated"
                     >
                       Ajay Prajapati
-                    </motion.a>
+                    </a>
                   </div>
-                </motion.div>
+                </div>
               </motion.div>
             </CardContent>
           </Card>

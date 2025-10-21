@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Award, Trophy, Users, Calendar, CheckCircle, AlertCircle } from 'lucide-react';
+import { PERFORMANCE_CONFIG } from '@/lib/performance';
 import { events, calculateEventPoints } from '@/data/events';
 import { useSupabaseCollegeStore } from '@/store/supabaseCollegeStore';
 import { Button } from '@/components/ui/button';

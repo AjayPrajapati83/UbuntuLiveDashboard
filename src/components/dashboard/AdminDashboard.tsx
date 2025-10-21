@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BarChart3, Calendar, Users, Trophy, Award, TrendingDown, Shield, Zap } from 'lucide-react';
+import { PERFORMANCE_CONFIG, getAnimationProps } from '@/lib/performance';
 import { events } from '@/data/events';
 import { useSupabaseCollegeStore } from '@/store/supabaseCollegeStore';
 import { PointsAwardForm } from '@/components/admin/PointsAwardForm';
@@ -60,35 +61,21 @@ export const AdminDashboard = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="bg-white/30 backdrop-blur-md rounded-2xl p-8 mb-8 border border-white/40 hover:shadow-2xl shadow-xl transition-all duration-500 relative overflow-hidden"
+        className="glass-card-optimized rounded-2xl p-8 mb-8 border border-white/40 hover:shadow-xl shadow-xl transition-all duration-300 relative overflow-hidden gpu-accelerated"
       >
-        {/* Animated Background */}
-        <motion.div
-          animate={{ 
-            backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+        {/* Optimized Background */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-red-100/20 via-orange-100/20 to-yellow-100/20 opacity-40"
+          style={{ 
+            backgroundSize: '300% 300%',
+            animation: 'panchtavya-flow 20s ease-in-out infinite',
+            willChange: 'background-position'
           }}
-          transition={{ 
-            duration: 15, 
-            repeat: Infinity, 
-            ease: "linear" 
-          }}
-          className="absolute inset-0 bg-gradient-to-r from-red-100/30 via-orange-100/30 to-yellow-100/30 opacity-50"
-          style={{ backgroundSize: '400% 400%' }}
         />
 
         <div className="relative z-10">
           <div className="flex items-center gap-4">
-            <motion.div
-              animate={{ 
-                rotate: [0, 360],
-                scale: [1, 1.1, 1]
-              }}
-              transition={{ 
-                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                scale: { duration: 2, repeat: Infinity }
-              }}
-              className="relative"
-            >
+            <div className="relative animate-float gpu-accelerated">
               <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
                 <img 
                   src="/circle logo.png" 
@@ -96,14 +83,10 @@ export const AdminDashboard = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <motion.div
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center"
-              >
+              <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center animate-pulse-slow">
                 <Zap className="w-4 h-4 text-white" />
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
             
             <div className="flex-1">
               <motion.h1
@@ -112,34 +95,26 @@ export const AdminDashboard = () => {
                 transition={{ delay: 0.2, duration: 0.6 }}
                 className="text-4xl md:text-5xl font-bold mb-3"
               >
-                <motion.span
-                  animate={{ 
-                    backgroundPosition: ['0%', '100%', '0%'] 
-                  }}
-                  transition={{ 
-                    duration: 3, 
-                    repeat: Infinity, 
-                    ease: "linear" 
-                  }}
+                <span
                   className="inline-block bg-gradient-to-r from-ubuntu-500 via-orange-500 to-red-500 bg-clip-text text-transparent font-extrabold"
-                  style={{ backgroundSize: '200%' }}
+                  style={{ 
+                    backgroundSize: '200%',
+                    animation: 'panchtavya-flow 4s ease-in-out infinite',
+                    willChange: 'background-position'
+                  }}
                 >
                   Ubuntu 2025
-                </motion.span>{' '}
-                <motion.span
-                  animate={{ 
-                    backgroundPosition: ['100%', '0%', '100%'] 
-                  }}
-                  transition={{ 
-                    duration: 3, 
-                    repeat: Infinity, 
-                    ease: "linear" 
-                  }}
+                </span>{' '}
+                <span
                   className="inline-block bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 bg-clip-text text-transparent font-extrabold"
-                  style={{ backgroundSize: '200%' }}
+                  style={{ 
+                    backgroundSize: '200%',
+                    animation: 'panchtavya-flow 4s ease-in-out infinite reverse',
+                    willChange: 'background-position'
+                  }}
                 >
                   Admin
-                </motion.span>
+                </span>
               </motion.h1>
               
               <motion.div
@@ -163,7 +138,7 @@ export const AdminDashboard = () => {
         transition={{ delay: 0.6, duration: 0.5 }}
       >
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-          <TabsList className="bg-white/25 backdrop-blur-md border border-white/40 p-2 shadow-lg">
+          <TabsList className="glass-card-optimized border border-white/40 p-2 shadow-lg gpu-accelerated">
             {tabsData.map((tab, index) => {
               const Icon = tab.icon;
               return (
@@ -216,16 +191,12 @@ export const AdminDashboard = () => {
                           transition: { duration: 0.2 }
                         }}
                       >
-                        <Card className="bg-white/25 backdrop-blur-md border border-white/40 hover:border-white/60 transition-all duration-300 hover:shadow-xl shadow-md">
+                        <Card className="glass-card-optimized border border-white/40 hover:border-white/60 transition-all duration-200 hover:shadow-xl shadow-md gpu-accelerated">
                           <CardContent className="p-6">
                             <div className="flex items-center gap-3">
-                              <motion.div
-                                animate={{ rotate: [0, 10, -10, 0] }}
-                                transition={{ duration: 4, repeat: Infinity, delay: index * 0.5 }}
-                                className={`w-12 h-12 rounded-lg bg-gradient-to-r ${stat.color} flex items-center justify-center shadow-lg`}
-                              >
+                              <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${stat.color} flex items-center justify-center shadow-lg animate-float gpu-accelerated`}>
                                 <Icon className="w-6 h-6 text-white" />
-                              </motion.div>
+                              </div>
                               <div>
                                 <motion.p
                                   key={`stat-${stat.label}-${stat.value}`}
@@ -246,7 +217,7 @@ export const AdminDashboard = () => {
                 </div>
 
                 {/* Event Distribution */}
-                <Card className="bg-white/25 backdrop-blur-md border border-white/40 shadow-xl">
+                <Card className="glass-card-optimized border border-white/40 shadow-xl gpu-accelerated">
                   <CardHeader>
                     <CardTitle className="text-xl font-semibold text-gray-800">Event Distribution</CardTitle>
                   </CardHeader>
@@ -265,13 +236,9 @@ export const AdminDashboard = () => {
                           whileHover={{ scale: 1.02 }}
                           className={`text-center p-6 rounded-xl bg-gradient-to-br ${event.color} text-white shadow-lg hover:shadow-xl transition-all duration-300`}
                         >
-                          <motion.div
-                            animate={{ scale: [1, 1.1, 1] }}
-                            transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
-                            className="text-4xl font-bold mb-2"
-                          >
+                          <div className="text-4xl font-bold mb-2 animate-pulse-slow">
                             {event.count}
-                          </motion.div>
+                          </div>
                           <div className="text-lg font-medium mb-1">{event.type} Events</div>
                           <div className="text-sm opacity-90">{event.points} participation points</div>
                         </motion.div>
@@ -281,7 +248,7 @@ export const AdminDashboard = () => {
                 </Card>
 
                 {/* Recent Activity */}
-                <Card className="bg-white/25 backdrop-blur-md border border-white/40 shadow-xl">
+                <Card className="glass-card-optimized border border-white/40 shadow-xl gpu-accelerated">
                   <CardHeader>
                     <CardTitle className="text-xl font-semibold text-gray-800">Recent Activity</CardTitle>
                   </CardHeader>
@@ -313,7 +280,7 @@ export const AdminDashboard = () => {
                               exit={{ opacity: 0, x: 20 }}
                               transition={{ delay: index * 0.05 }}
                               whileHover={{ scale: 1.02 }}
-                              className="flex items-center justify-between p-4 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 hover:border-white/60 transition-all duration-200 shadow-md"
+                              className="flex items-center justify-between p-4 glass-card-optimized rounded-lg border border-white/40 hover:border-white/60 transition-all duration-200 shadow-md gpu-accelerated"
                             >
                               <div className="flex items-center gap-3">
                                 <motion.div
