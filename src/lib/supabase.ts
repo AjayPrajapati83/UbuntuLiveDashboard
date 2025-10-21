@@ -1,7 +1,17 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key';
+
+// Validate environment variables in production
+if (process.env.NODE_ENV === 'production') {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL === 'https://placeholder.supabase.co') {
+    throw new Error('NEXT_PUBLIC_SUPABASE_URL is required in production. Please set it in your Vercel environment variables.');
+  }
+  if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY === 'placeholder-key') {
+    throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is required in production. Please set it in your Vercel environment variables.');
+  }
+}
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   realtime: {

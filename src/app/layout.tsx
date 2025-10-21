@@ -10,7 +10,13 @@ export const metadata: Metadata = {
   description: 'Official Ubuntu 2025 College Fest Events Management Dashboard',
   keywords: 'Ubuntu 2025, college fest, events, dashboard, management',
   authors: [{ name: 'Ubuntu 2025 Team' }],
-  viewport: 'width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no',
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  userScalable: false,
 }
 
 export default function RootLayout({
