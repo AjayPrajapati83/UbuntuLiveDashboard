@@ -31,7 +31,7 @@ export const Header = () => {
       }}
     >
       <div className="max-w-7xl mx-auto mobile-padding">
-        <div className="flex items-center justify-between h-16 sm:h-16 min-h-[4rem]">
+        <div className="flex items-center justify-between h-20 sm:h-20 lg:h-24 min-h-[5rem]">
           {/* Logo and Title */}
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -40,13 +40,13 @@ export const Header = () => {
             <OptimizedImage
               src="/circle logo.png"
               alt="Ubuntu 2025 Logo"
-              width={40}
-              height={40}
-              className="rounded-lg shadow-lg sm:w-12 sm:h-12 md:w-14 md:h-14"
+              width={56}
+              height={56}
+              className="rounded-lg shadow-lg w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16"
               priority={true}
             />
             <div className="block">
-              <h1 className="text-sm sm:text-lg md:text-xl font-bold">
+              <h1 className="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold">
                 <span className="bg-gradient-to-r from-fire-500 via-water-500 to-space-500 bg-clip-text text-transparent">
                   Ubuntu
                 </span>{' '}
@@ -54,26 +54,60 @@ export const Header = () => {
                   2025
                 </span>
               </h1>
-              <div className="flex items-center gap-1 text-xs text-gray-600 mt-0.5">
-                <Flame className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-fire-400" />
-                <Droplets className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-water-400" />
-                <Wind className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-air-400" />
-                <Mountain className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-earth-400" />
-                <Orbit className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-space-400" />
+              <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-600 mt-1">
+                <Flame className="w-3 h-3 sm:w-4 sm:h-4 text-fire-400" />
+                <Droplets className="w-3 h-3 sm:w-4 sm:h-4 text-water-400" />
+                <Wind className="w-3 h-3 sm:w-4 sm:h-4 text-air-400" />
+                <Mountain className="w-3 h-3 sm:w-4 sm:h-4 text-earth-400" />
+                <Orbit className="w-3 h-3 sm:w-4 sm:h-4 text-space-400" />
               </div>
             </div>
           </motion.div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="sm:hidden p-2 rounded-lg bg-white/25 backdrop-blur-md border border-white/40 text-gray-800 hover:bg-white/30 transition-colors"
-          >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {/* Right Side - Mobile and Desktop */}
+          <div className="flex items-center gap-3 lg:gap-4">
+            {/* College Logo - Mobile only */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.15 }}
+              className="sm:hidden"
+            >
+              <OptimizedImage
+                src="/Logo PNG.png"
+                alt="College Logo"
+                width={40}
+                height={40}
+                className="rounded-lg w-10 h-10 object-contain shadow-lg"
+              />
+            </motion.div>
 
-          {/* Desktop User Info and Actions */}
-          <div className="hidden sm:flex items-center gap-3 lg:gap-4">
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="sm:hidden p-2 rounded-lg bg-white/25 backdrop-blur-md border border-white/40 text-gray-800 hover:bg-white/30 transition-colors"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+
+            {/* College Logo - Desktop */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.15 }}
+              className="hidden sm:block"
+            >
+              <OptimizedImage
+                src="/Logo PNG.png"
+                alt="College Logo"
+                width={56}
+                height={56}
+                className="rounded-lg w-12 h-12 lg:w-14 lg:h-14 object-contain shadow-lg"
+              />
+            </motion.div>
+
+            {/* Desktop User Info and Actions */}
+            <div className="hidden sm:flex items-center gap-3 lg:gap-4">
             <motion.div
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -111,6 +145,7 @@ export const Header = () => {
                 <span className="lg:hidden">Exit</span>
               </Button>
             </motion.div>
+            </div>
           </div>
         </div>
 

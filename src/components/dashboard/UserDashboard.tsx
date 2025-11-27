@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Filter, Search, Sparkles, Users, Trophy, Star, Flame, Droplets, Wind, Mountain, Orbit } from 'lucide-react';
+import { Calendar, Filter, Search, Sparkles, Users, Trophy, Star, Award, Flame, Droplets, Wind, Mountain, Orbit } from 'lucide-react';
 import { events } from '@/data/events';
 import { Event } from '@/types';
 import { EventCard } from '@/components/events/EventCard';
@@ -67,7 +67,29 @@ export const UserDashboard = () => {
         />
 
         <div className="relative z-10">
-          <div className="flex items-center gap-4 mb-6">
+          {/* College Information - Centered and Bold */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+            className="text-center mb-6"
+          >
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-800 leading-tight mb-2">
+              Chikitsak Samuha's Sir Sitaram and Lady Shantabai Patkar College of Arts and Science
+            </p>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-800 leading-tight mb-2">
+              and V. P. Varde College of Commerce and Economics, (Empowered Autonomous)
+            </p>
+            <p className="text-sm sm:text-base md:text-lg font-semibold text-gray-700 leading-tight mb-3">
+              Swami Vivekananda Rd, Piramal Nagar, Goregaon West, Mumbai 400 104
+            </p>
+            <p className="text-lg sm:text-xl md:text-2xl font-extrabold text-ubuntu-600 uppercase tracking-wider mb-4">
+              PRESENTS
+            </p>
+          </motion.div>
+
+          {/* Logo and Welcome Section - Centered */}
+          <div className="flex flex-col items-center gap-4 mb-6">
             <motion.div
               animate={{ 
                 y: [0, -10, 0],
@@ -83,26 +105,26 @@ export const UserDashboard = () => {
               <OptimizedImage
                 src="/circle logo.png"
                 alt="Ubuntu 2025 Logo"
-                width={80}
-                height={80}
-                className="rounded-full shadow-2xl"
+                width={100}
+                height={100}
+                className="rounded-full shadow-2xl w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28"
                 priority={true}
               />
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center"
+                className="absolute -top-1 -right-1 w-7 h-7 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center"
               >
-                <Star className="w-3 h-3 text-white" />
+                <Star className="w-4 h-4 text-white" />
               </motion.div>
             </motion.div>
             
-            <div className="flex-1">
+            <div className="text-center">
               <motion.h1
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
-                className="mobile-heading font-bold mb-3"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
               >
                 <motion.span
                   animate={{ 
@@ -135,34 +157,32 @@ export const UserDashboard = () => {
               </motion.h1>
               
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
-                className="mobile-text font-medium text-gray-800"
+                className="text-base sm:text-lg md:text-xl font-medium text-gray-800"
               >
-                <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
-                  <Flame className="w-4 h-4 text-fire-400" />
+                <div className="flex items-center gap-2 justify-center mb-2">
+                  <Flame className="w-5 h-5 text-fire-400" />
                   <span className="inline-block text-gray-800">Ubuntu Fest Live Dashboard</span>
-                  <Orbit className="w-4 h-4 text-space-400" />
+                  <Orbit className="w-5 h-5 text-space-400" />
                 </div>
-                <span className="block mt-1 text-sm sm:text-base text-gray-700">Discover Elemental Events & Track Live Rankings</span>
+                <span className="block text-sm sm:text-base md:text-lg text-gray-700">Discover Elemental Events & Track Live Rankings</span>
               </motion.div>
             </div>
           </div>
 
-          {/* Enhanced Event Stats */}
+          {/* Event Type Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4"
+            className="grid grid-cols-3 gap-3 sm:gap-4"
           >
             {[
-              { label: 'Fire Events', value: eventStats.flagship, color: 'from-fire-500 to-fire-600', icon: Flame, element: 'fire' },
-              { label: 'Water Events', value: eventStats.large, color: 'from-water-500 to-water-600', icon: Droplets, element: 'water' },
-              { label: 'Air Events', value: eventStats.small, color: 'from-air-500 to-air-600', icon: Wind, element: 'air' },
-              { label: 'Earth Events', value: eventStats.day1, color: 'from-earth-500 to-earth-600', icon: Mountain, element: 'earth' },
-              { label: 'Space Events', value: eventStats.day2, color: 'from-space-500 to-space-600', icon: Orbit, element: 'space' },
+              { label: 'Flagship Events', value: eventStats.flagship, color: 'from-ubuntu-500 to-orange-500', icon: Trophy, points: '250 pts' },
+              { label: 'Large Events', value: eventStats.large, color: 'from-blue-500 to-cyan-500', icon: Award, points: '150 pts' },
+              { label: 'Small Events', value: eventStats.small, color: 'from-purple-500 to-pink-500', icon: Star, points: '50 pts' },
             ].map((stat, index) => {
               const Icon = stat.icon;
               return (
@@ -194,6 +214,7 @@ export const UserDashboard = () => {
                     {stat.value}
                   </motion.div>
                   <div className="text-xs sm:text-sm text-gray-700 leading-tight font-medium">{stat.label}</div>
+                  <div className="text-xs text-gray-600 mt-1">{stat.points}</div>
                 </motion.div>
               );
             })}
