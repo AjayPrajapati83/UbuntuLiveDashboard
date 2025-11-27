@@ -51,8 +51,19 @@ export const useSupabaseCollegeStore = create<SupabaseCollegeState>((set, get) =
 
       if (error) throw error;
 
+      // Also fetch participations for history tracking
+      const { data: participations, error: participationsError } = await supabase
+        .from('participations')
+        .select('*')
+        .order('timestamp', { ascending: false });
+
+      if (participationsError) {
+        console.error('Error fetching participations:', participationsError);
+      }
+
       set({ 
         colleges: colleges || [], 
+        participations: participations || [],
         isLoading: false,
         isConnected: true 
       });
@@ -263,6 +274,26 @@ export const useSupabaseCollegeStore = create<SupabaseCollegeState>((set, get) =
         { event: '*', schema: 'public', table: 'participations' },
         (payload) => {
           console.log('Participation change detected:', payload);
+          
+          if (payload.eventType === 'INSERT') {
+            // Add new participation to local state
+            set(state => ({
+              participations: [payload.new as Participation, ...state.participations]
+            }));
+          } else if (payload.eventType === 'UPDATE') {
+            // Update existing participation
+            set(state => ({
+              participations: state.participations.map(p => 
+                p.id === payload.new.id ? payload.new as Participation : p
+              )
+            }));
+          } else if (payload.eventType === 'DELETE') {
+            // Remove deleted participation
+            set(state => ({
+              participations: state.participations.filter(p => p.id !== payload.old.id)
+            }));
+          }
+          
           // The college total_points will be updated automatically by the database trigger
           // We just need to refresh the colleges data
           get().fetchColleges();

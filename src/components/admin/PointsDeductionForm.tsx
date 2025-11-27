@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 export const PointsDeductionForm = () => {
   const [selectedCollegeId, setSelectedCollegeId] = useState('');
   const [pointsToDeduct, setPointsToDeduct] = useState(0);
+  const [reason, setReason] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { colleges, fetchColleges, awardPoints } = useSupabaseCollegeStore();
@@ -32,6 +33,11 @@ export const PointsDeductionForm = () => {
       return;
     }
 
+    if (!reason.trim()) {
+      toast.error('Please provide a reason for the deduction');
+      return;
+    }
+
     if (selectedCollege && pointsToDeduct > selectedCollege.total_points) {
       toast.error('Cannot deduct more points than the college currently has');
       return;
@@ -40,11 +46,11 @@ export const PointsDeductionForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Award negative points for deduction
+      // Award negative points for deduction with reason in event name
       const success = await awardPoints(
         selectedCollegeId,
         `deduction_${Date.now()}`, // Unique event ID for deduction
-        'Points Deduction',
+        `Points Deduction: ${reason}`,
         'participant',
         -pointsToDeduct // Negative points for deduction
       );
@@ -53,6 +59,7 @@ export const PointsDeductionForm = () => {
         // Reset form
         setSelectedCollegeId('');
         setPointsToDeduct(0);
+        setReason('');
         
         toast.success(`${pointsToDeduct} points deducted successfully!`);
       }
@@ -163,32 +170,61 @@ export const PointsDeductionForm = () => {
                 className="bg-white/20 backdrop-blur-md border border-white/20 focus:border-red-500"
                 required
               />
-              {selectedCollege && pointsToDeduct > 0 && (
-                <div className="text-sm text-gray-600 bg-orange-50 p-3 rounded-lg border border-orange-200">
-                  <div className="flex items-center gap-2 text-orange-700">
-                    <AlertTriangle className="w-4 h-4" />
-                    <span className="font-medium">Deduction Preview</span>
-                  </div>
-                  <p className="mt-1 text-orange-600">
-                    <strong>{selectedCollege.name}</strong> will have{' '}
-                    <strong className="text-red-700">{pointsToDeduct} points deducted</strong>.
-                    <br />
-                    New total: <strong>{selectedCollege.total_points - pointsToDeduct} points</strong>
-                  </p>
-                </div>
-              )}
             </motion.div>
+
+            {/* Reason for Deduction */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+              className="space-y-2"
+            >
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
+                <AlertTriangle className="w-4 h-4 text-red-500" />
+                Reason for Deduction
+              </label>
+              <textarea
+                value={reason}
+                onChange={(e) => setReason(e.target.value)}
+                placeholder="Enter reason for deduction (e.g., Rule violation, Disqualification, etc.)..."
+                className="w-full p-3 bg-white/20 backdrop-blur-md border border-white/20 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 min-h-[80px] resize-none"
+                required
+              />
+              <p className="text-xs text-gray-500">This reason will be recorded in the history for transparency</p>
+            </motion.div>
+
+            {/* Deduction Preview */}
+            {selectedCollege && pointsToDeduct > 0 && reason.trim() && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                className="text-sm text-gray-600 bg-orange-50 p-3 rounded-lg border border-orange-200"
+              >
+                <div className="flex items-center gap-2 text-orange-700">
+                  <AlertTriangle className="w-4 h-4" />
+                  <span className="font-medium">Deduction Preview</span>
+                </div>
+                <p className="mt-1 text-orange-600">
+                  <strong>{selectedCollege.name}</strong> will have{' '}
+                  <strong className="text-red-700">{pointsToDeduct} points deducted</strong>.
+                  <br />
+                  Reason: <strong>{reason}</strong>
+                  <br />
+                  New total: <strong>{selectedCollege.total_points - pointsToDeduct} points</strong>
+                </p>
+              </motion.div>
+            )}
 
             {/* Submit Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.6 }}
               className="pt-4"
             >
               <Button
                 type="submit"
-                disabled={isSubmitting || !selectedCollegeId || pointsToDeduct <= 0}
+                disabled={isSubmitting || !selectedCollegeId || pointsToDeduct <= 0 || !reason.trim()}
                 className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (

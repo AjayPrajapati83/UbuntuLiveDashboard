@@ -154,14 +154,9 @@ export const Leaderboard = () => {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.05 + 0.3 }}
                         >
-                          <h3 className="font-semibold text-gray-800 truncate text-sm">
+                          <h3 className="font-semibold text-gray-800 truncate">
                             {college.name}
                           </h3>
-                          <div className="mt-1">
-                            <span className="text-xs text-gray-500">
-                              0 events
-                            </span>
-                          </div>
                         </motion.div>
                       </div>
 

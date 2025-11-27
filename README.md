@@ -1,6 +1,14 @@
-# Ubuntu 2025 Events Dashboard - Next.js Edition
+# Ubuntu 2025 Events Dashboard
 
-A modern, enhanced version of the Ubuntu 2025 College Fest Events Management Dashboard built with Next.js, TypeScript, and cutting-edge UI technologies.
+A modern, real-time college fest events management dashboard built with Next.js, TypeScript, Supabase, and cutting-edge UI technologies.
+
+## 🎉 Latest Updates
+
+- ✅ **29 Events** organized by Day 1 & Day 2
+- ✅ **History Tab** for complete audit trail
+- ✅ **Reason Field** for transparent point deductions
+- ✅ **Real-time Sync** across all devices
+- ✅ **5 Event Categories** (Performing Arts, Fine Arts, Online Games, Sports, Creative Challenges)
 
 ## 🚀 New Features & Enhancements
 
@@ -34,17 +42,18 @@ A modern, enhanced version of the Ubuntu 2025 College Fest Events Management Das
 - **Notifications**: Sonner (toast notifications)
 - **Data Storage**: Local Storage (demo) / Supabase ready
 
-## 📦 Installation & Setup
+## 📦 Quick Start
 
-1. **Clone and Navigate**
-   ```bash
-   cd ubuntu-dashboard-nextjs
-   ```
+### First Time Setup
 
-2. **Install Dependencies**
+1. **Install Dependencies**
    ```bash
    npm install
    ```
+
+2. **Setup Supabase** (if not already done)
+   - See `UPDATE_GUIDE.md` for detailed steps
+   - Or use `QUICK_UPDATE_STEPS.md` for 5-minute setup
 
 3. **Run Development Server**
    ```bash
@@ -53,6 +62,13 @@ A modern, enhanced version of the Ubuntu 2025 College Fest Events Management Das
 
 4. **Open Browser**
    Navigate to `http://localhost:3000`
+
+### Updating Existing Setup
+
+If you already have Supabase configured:
+1. Run `populate-events-supabase.sql` in Supabase SQL Editor
+2. Restart your app: `npm run dev`
+3. See `QUICK_UPDATE_STEPS.md` for details
 
 ## 🎮 Demo Credentials
 
@@ -108,30 +124,38 @@ src/
 
 ## 🎯 Key Features
 
-### 🔐 **Enhanced Authentication**
-- Animated login form with loading states
-- Role-based access control
+### 🔐 **Authentication**
+- Role-based access (Student/Admin)
 - Persistent session management
-- Demo credential quick-select
+- Animated login with loading states
 
 ### 📊 **User Dashboard**
-- Interactive event discovery with animations
-- Advanced filtering with real-time updates
-- Responsive event cards with hover effects
-- Live leaderboard with smooth transitions
+- Browse 29 events with advanced filtering
+- Filter by Day, Type, Category
+- Real-time leaderboard updates
+- Responsive event cards with animations
 
 ### ⚙️ **Admin Dashboard**
-- Comprehensive analytics with animated stats
-- Points awarding system with validation
-- College management with CRUD operations
-- Real-time activity tracking
-- Tabbed interface with smooth transitions
+- **Overview**: Analytics and recent activity
+- **Award Points**: Participation and winner points
+- **Deduct Points**: With required reason field
+- **Manage Colleges**: Add/remove colleges
+- **History**: Complete audit trail (NEW)
+- **Events**: View all 29 events
+- **Leaderboard**: Live rankings
 
-### 🏆 **Leaderboard System**
-- Real-time ranking updates
-- Animated position changes
-- Progress bars for top performers
-- Responsive design for all devices
+### 🏆 **Real-time Features**
+- Instant leaderboard updates across all devices
+- Live history tracking
+- WebSocket-based synchronization
+- No manual refresh needed
+
+### 📜 **History & Transparency**
+- Complete transaction audit trail
+- Reasons for all point deductions
+- Filter by additions/deductions
+- Search by college/event
+- Real-time statistics
 
 ## 🎨 Animation Features
 
@@ -180,14 +204,34 @@ npm run lint         # Run ESLint
 npx shadcn-ui@latest add [component-name]
 ```
 
-## 🌟 Future Enhancements
+## 📊 Events Overview
 
-- [ ] Dark mode implementation
-- [ ] Real-time WebSocket updates
-- [ ] Advanced analytics dashboard
-- [ ] Mobile app with React Native
-- [ ] PWA capabilities
-- [ ] Multi-language support
+**Total: 29 Events**
+
+### Day 1 (16 Events)
+- 2 Flagship (250 pts participation)
+- 8 Large (150 pts participation)
+- 6 Small (50 pts participation)
+
+### Day 2 (13 Events)
+- 7 Flagship (250 pts participation)
+- 3 Large (150 pts participation)
+- 3 Small (50 pts participation)
+
+### Categories
+- Performing Arts (7 events)
+- Fine Arts (8 events)
+- Online Games (7 events)
+- Sports (4 events)
+- Creative Challenges (7 events)
+
+## 📚 Documentation
+
+- **`UPDATE_GUIDE.md`** - Complete update guide for existing setup
+- **`QUICK_UPDATE_STEPS.md`** - 5-minute quick update steps
+- **`VERCEL_DEPLOYMENT_GUIDE.md`** - Deploy to Vercel
+- **`populate-events-supabase.sql`** - SQL to populate events
+- **`verify-database.sql`** - Verify database setup
 
 ## 📄 License
 

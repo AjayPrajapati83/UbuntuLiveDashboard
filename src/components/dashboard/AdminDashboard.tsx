@@ -9,6 +9,7 @@ import { useSupabaseCollegeStore } from '@/store/supabaseCollegeStore';
 import { PointsAwardForm } from '@/components/admin/PointsAwardForm';
 import { PointsDeductionForm } from '@/components/admin/PointsDeductionForm';
 import { CollegeManagement } from '@/components/admin/CollegeManagement';
+import { HistoryTab } from '@/components/admin/HistoryTab';
 import { Leaderboard } from '@/components/leaderboard/Leaderboard';
 import { EventCard } from '@/components/events/EventCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -16,12 +17,18 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
-  const { colleges, fetchColleges, participations } = useSupabaseCollegeStore();
+  const { colleges, fetchColleges, participations, subscribeToChanges, unsubscribeFromChanges } = useSupabaseCollegeStore();
 
-  // Fetch data on component mount
+  // Fetch data and subscribe to real-time changes on component mount
   useEffect(() => {
     fetchColleges();
-  }, [fetchColleges]);
+    subscribeToChanges();
+    
+    // Cleanup: unsubscribe when component unmounts
+    return () => {
+      unsubscribeFromChanges();
+    };
+  }, [fetchColleges, subscribeToChanges, unsubscribeFromChanges]);
 
   const stats = {
     totalEvents: events.length,
@@ -50,6 +57,7 @@ export const AdminDashboard = () => {
     { id: 'award-points', label: 'Award Points', icon: Award },
     { id: 'deduct-points', label: 'Deduct Points', icon: TrendingDown },
     { id: 'manage-colleges', label: 'Manage Colleges', icon: Users },
+    { id: 'history', label: 'History', icon: Shield },
     { id: 'events', label: 'Events', icon: Calendar },
     { id: 'leaderboard', label: 'Leaderboard', icon: Trophy },
   ];
@@ -359,6 +367,18 @@ export const AdminDashboard = () => {
                 className="max-w-4xl mx-auto"
               >
                 <CollegeManagement />
+              </motion.div>
+            </TabsContent>
+
+            <TabsContent value="history">
+              <motion.div
+                key="history"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <HistoryTab />
               </motion.div>
             </TabsContent>
 
