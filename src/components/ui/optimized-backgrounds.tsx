@@ -565,7 +565,7 @@ export const OptimizedPanchtavyaBackground = () => {
     }, 12000); // Increased interval for better performance
 
     return () => clearInterval(interval);
-  }, [isManualControl]);
+  }, [isManualControl, elements.length]);
 
   const handleElementClick = useCallback((index: number) => {
     setCurrentElement(index);
@@ -592,7 +592,7 @@ export const OptimizedPanchtavyaBackground = () => {
       default:
         return <OptimizedFireBackground />;
     }
-  }, [currentElement]);
+  }, [currentElement, elements]);
 
   return (
     <motion.div 

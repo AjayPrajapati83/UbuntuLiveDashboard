@@ -75,7 +75,7 @@ export const UserDashboard = () => {
             className="text-center mb-6"
           >
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-800 leading-tight mb-2">
-              Chikitsak Samuha's Sir Sitaram and Lady Shantabai Patkar College of Arts and Science
+              Chikitsak Samuha&apos;s Sir Sitaram and Lady Shantabai Patkar College of Arts and Science
             </p>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-800 leading-tight mb-2">
               and V. P. Varde College of Commerce and Economics, (Empowered Autonomous)

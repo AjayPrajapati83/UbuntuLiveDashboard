@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BarChart3, Calendar, Users, Trophy, Award, TrendingDown, Shield, Zap } from 'lucide-react';
 import { PERFORMANCE_CONFIG, getAnimationProps } from '@/lib/performance';
 import { events } from '@/data/events';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 import { useSupabaseCollegeStore } from '@/store/supabaseCollegeStore';
 import { PointsAwardForm } from '@/components/admin/PointsAwardForm';
 import { PointsDeductionForm } from '@/components/admin/PointsDeductionForm';
@@ -85,9 +86,11 @@ export const AdminDashboard = () => {
           <div className="flex items-center gap-4">
             <div className="relative animate-float gpu-accelerated">
               <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
-                <img 
+                <OptimizedImage 
                   src="/circle logo.png" 
                   alt="Ubuntu Logo" 
+                  width={80}
+                  height={80}
                   className="w-full h-full object-cover"
                 />
               </div>

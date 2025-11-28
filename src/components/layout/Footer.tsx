@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Heart, Calendar, MapPin, Flame, Droplets, Wind, Mountain, Orbit } from 'lucide-react';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 export const Footer = () => {
   return (
@@ -21,9 +22,11 @@ export const Footer = () => {
             <h3 className="text-base sm:text-lg font-semibold mb-3">
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 {/* Ubuntu Logo */}
-                <img 
+                <OptimizedImage 
                   src="/circle logo.png" 
                   alt="Ubuntu Logo" 
+                  width={40}
+                  height={40}
                   className="w-8 h-8 sm:w-10 sm:h-10 rounded-full shadow-lg"
                 />
                 <span className="bg-gradient-to-r from-fire-500 via-water-500 to-space-500 bg-clip-text text-transparent">
